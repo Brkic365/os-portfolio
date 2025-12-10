@@ -20,7 +20,7 @@ const Wallpaper = () => {
     <div
       className="fixed inset-0 -z-10 transition-all duration-1000 ease-out"
       style={{
-        background: `
+        backgroundImage: `
           radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(30, 41, 59, 0.4) 0%, transparent 50%),
           radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
           radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
