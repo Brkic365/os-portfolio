@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🖥️ OS Portfolio
 
-## Getting Started
+A personal portfolio website reimagined as a fully functional, browser-based Operating System. Built with **Next.js 14**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**.
 
-First, run the development server:
+![Portfolio Preview](./public/preview.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Features
+
+- **Window Management System**: A robust custom window architecture supporting dragging, minimizing, maximizing, and stacking order.
+- **Dynamic Dock**: macOS-inspired bottom dock with hover effects and mobile responsiveness.
+- **Interactive Apps**:
+  - **📝 README**: A markdown-based text editor for project documentation.
+  - **⚙️ System**: A "stack" visualization dashboard.
+  - **📧 Mail**: A fully functional contact form modeled after a native mail client (integrated with Resend).
+  - **📁 Finder**: File system navigation for Projects and Lab experiments.
+- **Polished UI/UX**:
+  - Glassmorphism design language.
+  - Smooth Framer Motion animations for opening, closing, and interactions.
+  - Measurement-based pixel-perfect window centering.
+  - Responsive design that adapts from desktop to mobile stacks.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Email**: [Resend](https://resend.com/)
+
+## 🚀 Getting Started
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Brkic365/os-portfolio.git
+   cd os-portfolio
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Set up Environment Variables**:
+   Create a `.env.local` file and add your Resend API key for the contact form:
+   ```env
+   RESEND_API_KEY=re_your_api_key_here
+   ```
+
+4. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+5. **Build for production**:
+   ```bash
+   npm run build
+   ```
+
+## 📂 Project Structure
+
+```
+├── app/                  # Next.js App Router pages and API routes
+├── components/
+│   ├── layout/           # Shell, Dock, Desktop environment
+│   ├── modals/           # Application Windows (Contact, OSWindow, StackWindow, etc.)
+│   ├── ui/               # Shared UI components (Window wrapper, Button, etc.)
+│   ├── views/            # Content views (HomeView, DirectoryView)
+│   └── widgets/          # Desktop widgets (Clock)
+├── public/               # Static assets
+└── types/                # TypeScript definitions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Design Philosophy
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The goal was to create a portfolio that feels "alive." Instead of a static scroll, users explore the "OS" to find content. Every interaction—from dragging a window to sending an email—is designed to mimic the weight and responsiveness of a native desktop application.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*Designed & Built by Antonio Brkić.*
