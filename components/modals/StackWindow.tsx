@@ -1,8 +1,8 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Cpu, Globe, Database, Server, Layout, Code, Terminal, Layers, Box, Zap } from 'lucide-react';
-import DraggableWindow from '../ui/Window';
+import { X, Cpu, Globe, Database, Server, LayoutDashboard, Code, Terminal, Layers, Box, Zap } from 'lucide-react';
+import Window from '../ui/Window';
 
 interface StackWindowProps {
     isOpen: boolean;
@@ -22,11 +22,11 @@ const StackWindow = ({ isOpen, onClose }: StackWindowProps) => {
         },
         {
             title: 'Frontend',
-            icon: <Layout className="text-pink-400" size={18} />,
+            icon: <LayoutDashboard className="text-pink-400" size={18} />,
             skills: [
                 { name: 'React.js', icon: <Atom size={16} /> },
                 { name: 'Next.js', icon: <Zap size={16} /> },
-                { name: 'TailwindCSS', icon: <Layout size={16} /> },
+                { name: 'TailwindCSS', icon: <LayoutDashboard size={16} /> },
                 { name: 'Three.js', icon: <Box size={16} /> },
                 { name: 'Framer Motion', icon: <Layers size={16} /> },
             ]
@@ -42,8 +42,6 @@ const StackWindow = ({ isOpen, onClose }: StackWindowProps) => {
         }
     ];
 
-    // Custom icon component helper since standard Lucide might not have brand icons
-    // using generic Lucide icons as placeholders where specifics aren't available
     function Atom(props: any) {
         return (
             <svg
@@ -67,7 +65,7 @@ const StackWindow = ({ isOpen, onClose }: StackWindowProps) => {
     }
 
     return (
-        <DraggableWindow
+        <Window
             title="Library / System"
             isOpen={isOpen}
             onClose={onClose}
@@ -90,7 +88,7 @@ const StackWindow = ({ isOpen, onClose }: StackWindowProps) => {
                                     key={skill.name}
                                     className="group flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 transition-all duration-300 cursor-default relative overflow-hidden"
                                 >
-                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                                    <div className="absolute inset-0 bg-white/5 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                                     <div className="text-slate-400 group-hover:text-blue-400 transition-colors">
                                         {skill.icon}
                                     </div>
@@ -103,7 +101,7 @@ const StackWindow = ({ isOpen, onClose }: StackWindowProps) => {
                     </div>
                 ))}
             </div>
-        </DraggableWindow>
+        </Window>
     );
 };
 

@@ -2,13 +2,14 @@
 
 import { motion } from 'framer-motion';
 import { Project, LabItem } from '@/data/projects';
+import { FileItem } from '@/data/filesystem';
 import ProjectFolder from '../ProjectFolder';
 import FileCard from '../FileCard';
 
 interface DirectoryViewProps {
-  items: (Project | LabItem)[];
-  type: 'projects' | 'lab';
-  onItemClick: (item: Project | LabItem) => void;
+  items: FileItem[];
+  type: 'projects' | 'prototypes';
+  onItemClick: (item: FileItem) => void;
 }
 
 const DirectoryView = ({ items, type, onItemClick }: DirectoryViewProps) => {
@@ -23,11 +24,12 @@ const DirectoryView = ({ items, type, onItemClick }: DirectoryViewProps) => {
   };
 
   return (
+
     <motion.div
       variants={container}
       initial="hidden"
       animate="show"
-      className={`grid grid-cols-1 sm:grid-cols-2 ${type === 'lab' ? 'md:grid-cols-2 gap-6' : 'md:grid-cols-3 gap-10 md:gap-14'
+      className={`grid grid-cols-1 sm:grid-cols-2 ${type === 'prototypes' ? 'md:grid-cols-2 gap-6' : 'md:grid-cols-3 gap-10 md:gap-14'
         }`}
     >
       {items.map((item) => {
@@ -35,7 +37,7 @@ const DirectoryView = ({ items, type, onItemClick }: DirectoryViewProps) => {
           return (
             <ProjectFolder
               key={item.id}
-              project={item as Project}
+              project={item as unknown as Project}
               onClick={() => onItemClick(item)}
             />
           );
@@ -43,7 +45,7 @@ const DirectoryView = ({ items, type, onItemClick }: DirectoryViewProps) => {
           return (
             <FileCard
               key={item.id}
-              labItem={item as LabItem}
+              labItem={item as unknown as LabItem}
               onClick={() => onItemClick(item)}
             />
           );

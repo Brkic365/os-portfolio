@@ -16,11 +16,19 @@ const ProjectFolder = ({ project, onClick }: ProjectFolderProps) => {
       whileHover={{ scale: 1.02, y: -4 }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
-      className="glass-panel rounded-2xl overflow-hidden cursor-pointer group h-[400px] flex flex-col"
+      className="glass-panel rounded-2xl overflow-hidden cursor-pointer group h-[320px] flex flex-col"
     >
       {/* Cover Image - 85% height */}
-      <div className="h-[85%] bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 flex items-center justify-center text-7xl border-b border-white/5">
-        {project.coverImage || '📦'}
+      <div className="h-[85%] bg-gradient-to-br from-slate-800/50 via-slate-900/50 to-blue-950/30 flex items-center justify-center text-7xl border-b border-white/5 relative overflow-hidden">
+        {project.coverImage?.startsWith('/') ? (
+          <img
+            src={project.coverImage}
+            alt={project.name}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+        ) : (
+          <span>{project.coverImage || '📦'}</span>
+        )}
       </div>
 
       {/* Glass Footer Strip - 15% height */}

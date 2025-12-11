@@ -6,14 +6,15 @@ import Shell from '@/components/layout/Shell';
 import HomeView from '@/components/views/HomeView';
 import DirectoryView from '@/components/views/DirectoryView';
 import OSWindow from '@/components/modals/OSWindow';
-import { projects, labItems, Project, LabItem } from '@/data/projects';
+import { FileItem, getDirectoryContents } from '@/data/filesystem';
+import { Project, LabItem } from '@/data/projects'; // Keep generic types for now if needed, but OSWindow might need FileItem check
 
 function HomeContent() {
   const searchParams = useSearchParams();
   const currentPath = searchParams.get('path') || '/';
-  const [selectedItem, setSelectedItem] = useState<Project | LabItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<FileItem | null>(null);
 
-  const handleItemClick = (item: Project | LabItem) => {
+  const handleItemClick = (item: FileItem) => {
     setSelectedItem(item);
   };
 
@@ -28,20 +29,28 @@ function HomeContent() {
       case '/projects':
         return (
           <DirectoryView
-            items={projects}
+            items={getDirectoryContents('/projects')}
             type="projects"
             onItemClick={handleItemClick}
           />
         );
-      case '/lab':
+      case '/prototypes':
         return (
           <DirectoryView
-            items={labItems}
-            type="lab"
+            items={getDirectoryContents('/prototypes')}
+            type="prototypes"
             onItemClick={handleItemClick}
           />
         );
       default:
+        // Attempt to find if it's a known path
+        const contents = getDirectoryContents(currentPath);
+        if (contents.length > 0) {
+          // It's a directory
+          // Determine type (hacky heuristic or should pass it via state? For now default to projects view as fallback or create a generic one)
+          // But actually we only support these 2 specific views right now.
+          return <HomeView />;
+        }
         return <HomeView />;
     }
   };
@@ -51,7 +60,7 @@ function HomeContent() {
       {renderContent()}
       {selectedItem && (
         <OSWindow
-          item={selectedItem}
+          item={selectedItem as unknown as (Project | LabItem)}
           isOpen={!!selectedItem}
           onClose={handleCloseWindow}
         />

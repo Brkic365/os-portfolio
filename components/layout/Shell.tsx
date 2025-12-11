@@ -29,7 +29,7 @@ const Shell = ({ children }: ShellProps) => {
   const navItems = [
     { name: 'Home', path: '/', icon: Home, action: () => router.push('?path=/') },
     { name: 'Projects', path: '/projects', icon: Briefcase, action: () => router.push('?path=/projects') },
-    { name: 'Lab', path: '/lab', icon: FlaskConical, action: () => router.push('?path=/lab') },
+    { name: 'Prototypes', path: '/prototypes', icon: FlaskConical, action: () => router.push('?path=/prototypes') },
     { name: 'Contact', path: '#contact', icon: Mail, action: () => setIsContactOpen(true) }, // Special action for Contact
   ];
 

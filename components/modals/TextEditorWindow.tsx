@@ -10,7 +10,7 @@ interface TextEditorWindowProps {
   content: string;
 }
 
-const TextEditorWindow = ({ isOpen, onClose }: TextEditorWindowProps) => {
+const TextEditorWindow = ({ isOpen, onClose, content }: TextEditorWindowProps) => {
   const [windowSize, setWindowSize] = useState({ width: 800, height: 600 });
 
   useEffect(() => {
@@ -22,20 +22,7 @@ const TextEditorWindow = ({ isOpen, onClose }: TextEditorWindowProps) => {
     }
   }, []);
 
-  // Simple markdown-like syntax highlighting
-  const highlightText = (text: string) => {
-    const parts = text.split(/(TVZ|Student|Next\.js|Python|Game Dev|CS)/g);
-    return parts.map((part, index) => {
-      if (['TVZ', 'Student', 'Next.js', 'Python', 'Game Dev', 'CS'].includes(part)) {
-        return (
-          <span key={index} className="text-blue-400 font-semibold">
-            {part}
-          </span>
-        );
-      }
-      return <span key={index}>{part}</span>;
-    });
-  };
+
 
   return (
     <Window
@@ -48,32 +35,46 @@ const TextEditorWindow = ({ isOpen, onClose }: TextEditorWindowProps) => {
     >
       <div className="h-full bg-slate-900 text-slate-200 font-[family-name:var(--font-jetbrains-mono)] text-sm overflow-y-auto">
         <div className="p-8 space-y-6">
-          <div className="text-slate-400"># Antonio Brkić</div>
-          <div className="text-slate-400">## About</div>
-          <div className="text-slate-300 leading-relaxed">
-            {highlightText(
-              "I'm a 3rd-year CS Student at TVZ (Tehničko veleučilište u Zagrebu) with a passion for building beautiful, functional web applications."
-            )}
-          </div>
-          <div className="text-slate-300 leading-relaxed">
-            {highlightText(
-              'I specialize in Next.js and modern frontend technologies, with a growing interest in Game Dev and Python.'
-            )}
-          </div>
-          <div className="text-slate-400">## Skills</div>
-          <div className="text-slate-300">
-            <div>- Next.js</div>
-            <div>- TypeScript</div>
-            <div>- React</div>
-            <div>- Python</div>
-            <div>- Tailwind CSS</div>
-            <div>- Unity</div>
-            <div>- Framer Motion</div>
-          </div>
-          <div className="text-slate-400">## Status</div>
-          <div className="text-slate-300">
-            {highlightText('Currently: 3rd Year Student @ TVZ')}
-          </div>
+          {content.split('\n').map((line, index) => {
+            // Handle simple headers
+            if (line.startsWith('# ')) {
+              return <h1 key={index} className="text-2xl font-bold text-slate-100">{line.replace('# ', '')}</h1>;
+            }
+            if (line.startsWith('## ')) {
+              return <h2 key={index} className="text-xl font-semibold text-slate-400 mt-4">{line.replace('## ', '')}</h2>;
+            }
+            if (line.startsWith('### ')) {
+              return <h3 key={index} className="text-lg font-semibold text-slate-500 mt-2">{line.replace('### ', '')}</h3>;
+            }
+
+            // Handle blockquotes
+            const isBlockquote = line.trim().startsWith('>');
+            const cleanLine = isBlockquote ? line.replace(/^>\s?/, '') : line;
+
+            if (cleanLine.trim() === '') {
+              return <br key={index} />;
+            }
+
+            // Allow parsing of bold syntax **text**
+            const parseBold = (text: string) => {
+              const parts = text.split(/(\*\*.*?\*\*)/g);
+              return parts.map((part, i) => {
+                if (part.startsWith('**') && part.endsWith('**')) {
+                  return <strong key={i} className="font-bold text-slate-100">{part.slice(2, -2)}</strong>;
+                }
+                return <span key={i} className="text-slate-300">{part}</span>;
+              });
+            };
+
+            return (
+              <div key={index} className={`${isBlockquote ? 'pl-4 border-l-2 border-slate-700 my-1' : 'my-1'}`}>
+                <p className="leading-relaxed">
+                  {parseBold(cleanLine)}
+                </p>
+              </div>
+            );
+          })}
+
           <div className="flex items-center gap-2 mt-8">
             <span className="text-slate-500">_</span>
             <motion.span

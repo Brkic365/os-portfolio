@@ -1,9 +1,12 @@
+import { projects, labItems, Project, LabItem } from './projects';
+
 // File system data structure
+export type ItemType = 'file' | 'folder' | 'app';
 
 export interface FileItem {
     id: string;
     name: string;
-    type: 'file' | 'folder' | 'app';
+    type: ItemType;
     extension?: string;
     path: string;
     description?: string;
@@ -11,7 +14,9 @@ export interface FileItem {
     size?: string;
     liveUrl?: string;
     githubUrl?: string;
-    image?: string;
+    coverImage?: string; // Unified image property
+    icon?: 'game' | 'python'; // Specific for lab items
+    demoUrl?: string;
 }
 
 export interface Directory {
@@ -19,14 +24,42 @@ export interface Directory {
     items: FileItem[];
 }
 
+// Helper to convert Project to FileItem
+const mapProjectToFileItem = (p: Project): FileItem => ({
+    id: p.id,
+    name: p.name,
+    type: 'app',
+    path: `/projects/${p.id}`,
+    description: p.description,
+    techStack: p.techStack,
+    liveUrl: p.liveUrl,
+    githubUrl: p.githubUrl,
+    coverImage: p.coverImage,
+});
+
+// Helper to convert LabItem to FileItem
+const mapLabItemToFileItem = (l: LabItem): FileItem => ({
+    id: l.id,
+    name: l.name,
+    type: 'file',
+    path: `/prototypes/${l.id}`,
+    description: l.description,
+    techStack: l.techStack,
+    githubUrl: l.githubUrl,
+    demoUrl: l.demoUrl,
+    icon: l.icon,
+    coverImage: l.coverImage,
+    extension: l.icon === 'python' ? 'py' : 'exe'
+});
+
 // File system structure
 export const filesystem: Directory[] = [
     {
         path: '/',
         items: [
             { id: 'home', name: 'Home', type: 'folder', path: '/home' },
-            { id: 'projects', name: 'Projects', type: 'folder', path: '/projects' },
-            { id: 'lab', name: 'Lab', type: 'folder', path: '/lab' },
+            { id: 'projects', name: 'Workspace', type: 'folder', path: '/projects' },
+            { id: 'prototypes', name: 'Prototypes', type: 'folder', path: '/prototypes' },
             { id: 'bio', name: 'Bio', type: 'folder', path: '/bio' },
         ],
     },
@@ -45,58 +78,11 @@ export const filesystem: Directory[] = [
     },
     {
         path: '/projects',
-        items: [
-            {
-                id: 'ecommerce',
-                name: 'E-Commerce Platform',
-                type: 'app',
-                path: '/projects/ecommerce',
-                description: 'A full-stack e-commerce solution built with Next.js and Stripe. Features include product management, shopping cart, secure checkout, and admin dashboard.',
-                techStack: ['Next.js', 'TypeScript', 'Stripe', 'PostgreSQL', 'Tailwind CSS'],
-                size: '2.4 MB',
-                liveUrl: 'https://example.com',
-                githubUrl: 'https://github.com/yourusername/ecommerce',
-                image: '🛍️',
-            },
-            {
-                id: 'portfolio',
-                name: 'Portfolio System',
-                type: 'app',
-                path: '/projects/portfolio',
-                description: 'This very portfolio - a System Interface inspired by macOS Finder. Built with Next.js and Framer Motion.',
-                techStack: ['Next.js', 'TypeScript', 'Framer Motion', 'Tailwind CSS'],
-                size: '1.8 MB',
-                githubUrl: 'https://github.com/yourusername/portfolio',
-                image: '💼',
-            },
-        ],
+        items: projects.map(mapProjectToFileItem),
     },
     {
-        path: '/lab',
-        items: [
-            {
-                id: 'game-engine',
-                name: 'game_engine.py',
-                type: 'file',
-                extension: 'py',
-                path: '/lab/game-engine',
-                description: 'A 2D game engine built from scratch using Python and Pygame. Includes physics simulation, collision detection, and particle systems.',
-                techStack: ['Python', 'Pygame', 'NumPy', 'OpenGL'],
-                size: '856 KB',
-                githubUrl: 'https://github.com/yourusername/game-engine',
-            },
-            {
-                id: 'ai-experiment',
-                name: 'neural_net.py',
-                type: 'file',
-                extension: 'py',
-                path: '/lab/ai-experiment',
-                description: 'Experimental neural network implementation for image classification. Built as a learning project.',
-                techStack: ['Python', 'TensorFlow', 'NumPy'],
-                size: '423 KB',
-                githubUrl: 'https://github.com/yourusername/neural-net',
-            },
-        ],
+        path: '/prototypes',
+        items: labItems.map(mapLabItemToFileItem),
     },
     {
         path: '/bio',
@@ -107,38 +93,19 @@ export const filesystem: Directory[] = [
                 type: 'file',
                 extension: 'md',
                 path: '/bio/readme',
-                description: `# Antonio Brkić
-
-## About Me
-
-I'm a 3rd-year Computer Science student at TVZ (Tehničko veleučilište u Zagrebu) with a passion for building beautiful, functional web applications.
-
-I specialize in Next.js and modern frontend technologies, with a growing interest in game development and Python.
-
-## Education
-
-**Tehničko veleučilište u Zagrebu (TVZ)**
-- Bachelor of Computer Science
-- Expected Graduation: 2026
-- Focus: Web Development & Software Engineering
-
-## Skills
-
-- **Frontend**: Next.js, React, TypeScript, Tailwind CSS
-- **Backend**: Node.js, PostgreSQL, Stripe Integration
-- **Tools**: Git, Framer Motion, Three.js
-- **Learning**: Python, Game Development, AI/ML
-
-## Currently
-
-- Building innovative web applications
-- Exploring creative tech solutions
-- Contributing to open-source projects
-- Experimenting with game development
-
----
-
-*Feel free to explore my projects and reach out!*`,
+                description: `> **Header:** About Me
+>
+> **Bio:**
+> I am a 3rd-year Computer Science student at **TVZ (Zagreb)** bridging the gap between robust software engineering and interactive 3D web experiences.
+>
+> While my academic focus is Computer Science, my passion lies in building production-ready SaaS applications using the **Next.js** ecosystem. I specialize in architecting complex digital products with a focus on performance, scalability, and modern UI patterns.
+>
+> **Current Focus:**
+> 🚀 **Full-Stack Architecture:** Expert in React, Next.js, TypeScript, and Postgres.
+> 🕶️ **3D & AR on the Web:** Co-founder of **VectraXR** (B2B 3D visualization for the fitness industry).
+>
+> **Status:**
+> 🟢 Available for freelance & collaborations.`,
                 size: '2.1 KB',
             },
         ],

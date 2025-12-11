@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Github, Linkedin, Mail, MapPin, CheckCircle2 } from 'lucide-react';
-import DraggableWindow from '../ui/Window';
+import Window from '../ui/Window';
 
 interface ContactWindowProps {
     isOpen: boolean;
@@ -50,7 +50,7 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
     };
 
     return (
-        <DraggableWindow
+        <Window
             title="Mail — New Message"
             isOpen={isOpen}
             onClose={onClose}
@@ -66,7 +66,7 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
                     <div className="relative mb-6">
                         <div className="w-24 h-24 rounded-full bg-slate-700 ring-2 ring-white/10 overflow-hidden shadow-2xl">
                             {/* Placeholder Avatar */}
-                            <div className="w-full h-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-3xl">
+                            <div className="w-full h-full bg-slate-800 flex items-center justify-center text-3xl">
                                 👨‍💻
                             </div>
                         </div>
@@ -75,17 +75,17 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
                     </div>
 
                     <h3 className="text-xl font-bold text-slate-100 mb-1">Antonio Brkić</h3>
-                    <p className="text-sm text-slate-400 mb-6 font-medium">Software Engineer</p>
+                    <p className="text-sm text-slate-400 mb-6 font-medium">Full-Stack Engineer</p>
 
                     {/* Details */}
                     <div className="w-full space-y-3 mb-8" style={{ marginTop: "1.5rem", marginBottom: '1.5rem' }}>
                         <div className="flex items-center gap-3 text-sm text-slate-300 bg-white/5 p-2.5 rounded-lg border border-white/5" style={{ marginBottom: '0.5rem' }}>
                             <MapPin size={16} className="text-blue-400" />
-                            <span>Zagreb, Croatia</span>
+                            <span>Zagreb, HR</span>
                         </div>
                         <div className="flex items-center gap-3 text-sm text-slate-300 bg-white/5 p-2.5 rounded-lg border border-white/5">
                             <CheckCircle2 size={16} className="text-green-400" />
-                            <span>Open for work</span>
+                            <span>Available for work</span>
                         </div>
                     </div>
 
@@ -97,7 +97,7 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
                         <a href="https://linkedin.com/in/antonio-brkic" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 hover:bg-white/10 rounded-full transition-colors text-slate-300 hover:text-blue-400" title="LinkedIn">
                             <Linkedin size={20} />
                         </a>
-                        <a href="mailto:antonio.brkic@example.com" className="p-3 bg-white/5 hover:bg-white/10 rounded-full transition-colors text-slate-300 hover:text-green-400" title="Email">
+                        <a href="mailto:antonio@vectraxr.com" className="p-3 bg-white/5 hover:bg-white/10 rounded-full transition-colors text-slate-300 hover:text-green-400" title="Email">
                             <Mail size={20} />
                         </a>
                     </div>
@@ -147,7 +147,7 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
                         flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-300
                         ${isSent
                                         ? 'bg-green-500 text-white cursor-default'
-                                        : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-lg hover:shadow-blue-500/25 active:scale-95'
+                                        : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20 active:scale-95'
                                     }
                     `}
                             >
@@ -164,7 +164,7 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
                 </div>
 
             </div>
-        </DraggableWindow>
+        </Window>
     );
 };
 

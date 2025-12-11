@@ -77,4 +77,4 @@ The goal was to create a portfolio that feels "alive." Instead of a static scrol
 
 ---
 
-*Designed & Built by Antonio Brkić.*
+*Designed & Built by Antonio Brkić — Full-Stack Engineer.*

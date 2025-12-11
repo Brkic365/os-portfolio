@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, Github } from 'lucide-react';
 import { Project, LabItem } from '@/data/projects';
-import DraggableWindow from '../ui/Window';
+import Window from '../ui/Window';
 
 interface OSWindowProps {
   item: Project | LabItem;
@@ -15,7 +15,7 @@ const OSWindow = ({ item, isOpen, onClose }: OSWindowProps) => {
   const isProject = 'coverImage' in item;
 
   return (
-    <DraggableWindow
+    <Window
       title={isProject ? (item as Project).name : (item as LabItem).name}
       isOpen={isOpen}
       onClose={onClose}
@@ -24,8 +24,17 @@ const OSWindow = ({ item, isOpen, onClose }: OSWindowProps) => {
     >
       <div className="h-full flex flex-col overflow-y-auto">
         {/* Hero Image/Icon */}
-        <div className="shrink-0 aspect-video bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 flex items-center justify-center text-8xl border-b border-white/5">
-          {isProject ? (item as Project).coverImage || '📦' : '💻'}
+        {/* Hero Image/Icon */}
+        <div className="shrink-0 aspect-video bg-slate-800/50 flex items-center justify-center text-8xl border-b border-white/5 relative overflow-hidden">
+          {item.coverImage?.startsWith('/') ? (
+            <img
+              src={item.coverImage}
+              alt={item.name}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <span>{item.coverImage || (isProject ? '📦' : '💻')}</span>
+          )}
         </div>
 
         {/* Body */}
@@ -68,7 +77,7 @@ const OSWindow = ({ item, isOpen, onClose }: OSWindowProps) => {
                 Launch App
               </a>
             )}
-            {item.githubUrl && (
+            {item.githubUrl && item.githubUrl !== '' && (
               <a
                 href={item.githubUrl}
                 target="_blank"
@@ -93,7 +102,7 @@ const OSWindow = ({ item, isOpen, onClose }: OSWindowProps) => {
           </div>
         </div>
       </div>
-    </DraggableWindow>
+    </Window>
   );
 };
 
