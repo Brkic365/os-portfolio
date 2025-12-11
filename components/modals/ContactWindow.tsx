@@ -57,7 +57,7 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
             initialSize={{ width: 850, height: 600 }}
             center
         >
-            <div className="h-full flex flex-col md:flex-row bg-slate-900/40">
+            <div className="flex flex-col md:flex-row bg-slate-900/40 h-full overflow-y-auto md:overflow-hidden">
 
                 {/* LEFT COLUMN: Profile */}
                 <div className="w-full md:w-[300px] bg-black/20 border-b md:border-b-0 md:border-r border-white/10 p-8 flex flex-col items-center text-center">
@@ -104,7 +104,7 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
                 </div>
 
                 {/* RIGHT COLUMN: Composer */}
-                <div className="flex-1 flex flex-col p-6 md:p-8 bg-slate-900/30">
+                <div className="flex-1 flex flex-col p-6 md:p-8 bg-slate-900/30 overflow-y-auto">
                     <div className="flex items-center justify-between mb-8">
                         <h2 className="text-lg font-semibold text-slate-200 flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-blue-500" />

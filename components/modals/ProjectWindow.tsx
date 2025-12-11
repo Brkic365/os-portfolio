@@ -41,9 +41,20 @@ const ProjectWindow = ({ file, onClose }: ProjectWindowProps) => {
                 {/* Content */}
                 <div className="flex-1 p-6 space-y-6">
                     {/* Preview */}
-                    {file.type === 'app' && file.image && (
-                        <div className="w-full aspect-video rounded-xl bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 border border-white/5 flex items-center justify-center text-8xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]">
-                            {file.image}
+                    {/* Preview */}
+                    {file.type === 'app' && file.coverImage && (
+                        <div className="w-full aspect-video rounded-xl bg-slate-800/50 flex items-center justify-center border-b border-white/5 relative overflow-hidden">
+                            {file.coverImage.startsWith('/') ? (
+                                <img
+                                    src={file.coverImage}
+                                    alt={file.name}
+                                    className="w-full h-full object-cover"
+                                />
+                            ) : (
+                                <div className="text-8xl flex items-center justify-center w-full h-full bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20">
+                                    {file.coverImage}
+                                </div>
+                            )}
                         </div>
                     )}
 
