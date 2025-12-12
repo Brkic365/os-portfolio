@@ -60,37 +60,55 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
             <div className="flex flex-col md:flex-row bg-slate-900/40 h-full overflow-y-auto md:overflow-hidden">
 
                 {/* LEFT COLUMN: Profile */}
-                <div className="w-full md:w-[300px] bg-black/20 border-b md:border-b-0 md:border-r border-white/10 p-8 flex flex-col items-center text-center">
+                <div className="w-full md:w-[300px] bg-black/20 border-b md:border-b-0 md:border-r border-white/10 p-4 md:p-8 flex flex-row md:flex-col items-center md:items-center justify-between md:justify-start text-left md:text-center gap-4 shrink-0">
 
-                    {/* Avatar Ring */}
-                    <div className="relative mb-6">
-                        <div className="w-24 h-24 rounded-full bg-slate-700 ring-2 ring-white/10 overflow-hidden shadow-2xl">
-                            {/* Placeholder Avatar */}
-                            <div className="w-full h-full bg-slate-800 flex items-center justify-center text-3xl">
-                                👨‍💻
+                    {/* Left Side (Mobile) / Top (Desktop) */}
+                    <div className="flex flex-row md:flex-col items-center gap-4 md:gap-0">
+                        {/* Avatar Ring */}
+                        <div className="relative mb-0 md:mb-6 shrink-0">
+                            <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-slate-700 ring-2 ring-white/10 overflow-hidden shadow-2xl">
+                                {/* Placeholder Avatar */}
+                                <div className="w-full h-full bg-slate-800 flex items-center justify-center text-2xl md:text-3xl">
+                                    👨‍💻
+                                </div>
+                            </div>
+                            {/* Status Indicator */}
+                            <div className="absolute bottom-1 right-1 w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded-full border-2 border-black/50 shadow-sm" title="Available for work" />
+                        </div>
+
+                        <div className="flex flex-col md:items-center">
+                            <h3 className="text-lg md:text-xl font-bold text-slate-100 mb-0 md:mb-1">Antonio Brkić</h3>
+                            <p className="text-xs md:text-sm text-slate-400 font-medium md:mb-6">Full-Stack Engineer</p>
+
+                            {/* Mobile Socials */}
+                            <div className="flex md:hidden gap-2 mt-1.5">
+                                <a href="https://github.com/Brkic365" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors text-slate-300 hover:text-white" title="GitHub">
+                                    <Github size={18} />
+                                </a>
+                                <a href="https://linkedin.com/in/antonio-brkic" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors text-slate-300 hover:text-blue-400" title="LinkedIn">
+                                    <Linkedin size={18} />
+                                </a>
+                                <a href="mailto:antonio@vectraxr.com" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors text-slate-300 hover:text-green-400" title="Email">
+                                    <Mail size={18} />
+                                </a>
                             </div>
                         </div>
-                        {/* Status Indicator */}
-                        <div className="absolute bottom-1 right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-black/50 shadow-sm" title="Available for work" />
                     </div>
 
-                    <h3 className="text-xl font-bold text-slate-100 mb-1">Antonio Brkić</h3>
-                    <p className="text-sm text-slate-400 mb-6 font-medium">Full-Stack Engineer</p>
-
-                    {/* Details */}
-                    <div className="w-full space-y-3 mb-8" style={{ marginTop: "1.5rem", marginBottom: '1.5rem' }}>
-                        <div className="flex items-center gap-3 text-sm text-slate-300 bg-white/5 p-2.5 rounded-lg border border-white/5" style={{ marginBottom: '0.5rem' }}>
-                            <MapPin size={16} className="text-blue-400" />
+                    {/* Right Side (Mobile) / Details (Desktop) */}
+                    <div className="flex flex-col items-end md:items-center gap-2 md:gap-3 md:w-full md:mb-8 md:mt-1.5">
+                        <div className="flex items-center gap-2 text-xs md:text-sm text-slate-300 md:bg-white/5 p-1 md:p-2.5 rounded-lg md:border border-white/5">
+                            <MapPin size={14} className="text-blue-400" />
                             <span>Zagreb, HR</span>
                         </div>
-                        <div className="flex items-center gap-3 text-sm text-slate-300 bg-white/5 p-2.5 rounded-lg border border-white/5">
-                            <CheckCircle2 size={16} className="text-green-400" />
+                        <div className="flex items-center gap-2 text-xs md:text-sm text-slate-300 md:bg-white/5 p-1 md:p-2.5 rounded-lg md:border border-white/5">
+                            <CheckCircle2 size={14} className="text-green-400" />
                             <span>Available for work</span>
                         </div>
                     </div>
 
-                    {/* Social Row */}
-                    <div className="flex gap-4 mt-auto">
+                    {/* Social Row - Desktop Only */}
+                    <div className="hidden md:flex gap-4 mt-auto">
                         <a href="https://github.com/Brkic365" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 hover:bg-white/10 rounded-full transition-colors text-slate-300 hover:text-white" title="GitHub">
                             <Github size={20} />
                         </a>
