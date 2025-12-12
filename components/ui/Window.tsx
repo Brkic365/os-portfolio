@@ -27,6 +27,7 @@ const Window = ({
   const [size, setSize] = useState(initialSize);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartOffset, setDragStartOffset] = useState({ x: 0, y: 0 }); // Renamed to avoid confusion with Framer Motion's dragStart
+  const [isMobile, setIsMobile] = useState(false);
 
   const windowRef = useRef<HTMLDivElement>(null);
   const hasMoved = useRef(false); // Track if user moved it manually
@@ -40,9 +41,15 @@ const Window = ({
     setSize(initialSize);
   }, [initialSize.width, initialSize.height]);
 
-  // Removed the useLayoutEffect for JS-based centering. CSS handles it.
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    if (isMobile) return;
     if ((e.target as HTMLElement).closest('button')) return;
 
     // If the window was initially centered via CSS, convert its current position
@@ -106,7 +113,15 @@ const Window = ({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            style={{
+            style={isMobile ? {
+              position: 'fixed',
+              top: '12px',
+              left: '2.5%',
+              width: '95%',
+              height: 'calc(100% - 130px)', // Leave >80px for dock + safe area
+              x: 0,
+              y: 0
+            } : {
               x, // Motion value drives this
               y, // Motion value drives this
               width: size.width,
@@ -116,12 +131,12 @@ const Window = ({
               left: center && !hasMoved.current ? '50%' : 0,
               top: center && !hasMoved.current ? '50%' : 0,
             }}
-            className="fixed z-50 glass-panel rounded-2xl overflow-hidden border border-white/10 shadow-2xl flex flex-col"
+            className="fixed z-50 glass-panel overflow-hidden border border-white/10 shadow-2xl flex flex-col rounded-2xl"
           >
             {/* Header */}
             <div
               onMouseDown={handleMouseDown}
-              className="flex items-center justify-between px-4 py-2 border-b border-white/10 cursor-move bg-black/20"
+              className={`flex items-center justify-between px-4 py-2 border-b border-white/10 bg-black/20 ${isMobile ? '' : 'cursor-move'}`}
             >
               <div className="flex items-center gap-3">
                 {/* Traffic Lights */}
@@ -130,20 +145,28 @@ const Window = ({
                     onClick={onClose}
                     className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"
                   />
-                  <button className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors" />
-                  <button className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors" />
+                  {!isMobile && (
+                    <>
+                      <button className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors" />
+                      <button className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors" />
+                    </>
+                  )}
                 </div>
                 <span className="text-sm font-medium text-slate-200 font-[family-name:var(--font-jetbrains-mono)]">
                   {title}
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <button className="p-1 hover:bg-white/10 rounded transition-colors">
-                  <Minimize2 size={14} className="text-slate-400" />
-                </button>
-                <button className="p-1 hover:bg-white/10 rounded transition-colors">
-                  <Maximize2 size={14} className="text-slate-400" />
-                </button>
+                {!isMobile && (
+                  <>
+                    <button className="p-1 hover:bg-white/10 rounded transition-colors">
+                      <Minimize2 size={14} className="text-slate-400" />
+                    </button>
+                    <button className="p-1 hover:bg-white/10 rounded transition-colors">
+                      <Maximize2 size={14} className="text-slate-400" />
+                    </button>
+                  </>
+                )}
                 <button
                   onClick={onClose}
                   className="p-1 hover:bg-white/10 rounded transition-colors"
