@@ -38,6 +38,17 @@ const Wallpaper = () => {
         </h1>
       </div>
 
+      {/* Dot Grid Overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-20"
+        style={{
+          backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)',
+          backgroundSize: '32px 32px',
+          maskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)', // Optional fade out at bottom or just full
+          WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)'
+        }}
+      />
+
       <style jsx>{`
         @keyframes gradientShift {
           0% {
