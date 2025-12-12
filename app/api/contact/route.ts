@@ -10,7 +10,7 @@ export async function POST(request: Request) {
 
         const data = await resend.emails.send({
             from: 'Portfolio Contact <onboarding@resend.dev>',
-            to: ['antonio@vectraxr.com'],
+            to: ['contact@antoniobrkic.com'],
             subject: `[Portfolio] ${subject}`,
             react: ContactFormEmail({ subject, message }),
         });

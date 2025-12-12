@@ -101,7 +101,7 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
                         <a href="https://linkedin.com/in/antonio-brkic" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 hover:bg-white/10 rounded-full transition-colors text-slate-300 hover:text-blue-400" title="LinkedIn">
                             <Linkedin size={20} />
                         </a>
-                        <a href="mailto:antonio@vectraxr.com" className="p-3 bg-white/5 hover:bg-white/10 rounded-full transition-colors text-slate-300 hover:text-green-400" title="Email">
+                        <a href="mailto:contact@antoniobrkic.com" className="p-3 bg-white/5 hover:bg-white/10 rounded-full transition-colors text-slate-300 hover:text-green-400" title="Email">
                             <Mail size={20} />
                         </a>
                     </div>
