@@ -7,17 +7,20 @@ export interface Project {
     liveUrl?: string;
     githubUrl?: string;
     category: 'web' | 'game' | 'python';
+    previewVideo?: string;
 }
 
 export interface LabItem {
     id: string;
     name: string;
     description: string;
-    icon: 'game' | 'python';
+    icon: 'game' | 'python' | 'web';
     coverImage?: string;
     techStack: string[];
     githubUrl?: string;
     demoUrl?: string;
+    liveUrl?: string;
+    previewVideo?: string;
 }
 
 export const projects: Project[] = [
@@ -142,5 +145,15 @@ export const labItems: LabItem[] = [
         coverImage: '/projects/route-master.png',
         techStack: ['Python', 'Tkinter', 'NumPy', 'OpenStreetMap', 'A*'],
         githubUrl: 'https://github.com/Brkic365/routeMaster'
+    },
+    {
+        id: 'ai-motion-metrics',
+        name: 'AI_MotionMetrics.exe',
+        description: 'Real-time computer vision application using TensorFlow.js (MoveNet). Implements geometric vector analysis to calculate joint angles and track fitness reps client-side.',
+        icon: 'web',
+        previewVideo: '/videos/motion-metrics-preview.mp4',
+        techStack: ['Next.js', 'TensorFlow.js', 'MoveNet', 'Tailwind CSS'],
+        liveUrl: 'https://ai-motion-metrics.vercel.app/',
+        githubUrl: 'https://github.com/Brkic365/ai-motion-metrics'
     }
 ];

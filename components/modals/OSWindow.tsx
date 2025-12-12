@@ -26,7 +26,16 @@ const OSWindow = ({ item, isOpen, onClose }: OSWindowProps) => {
         {/* Hero Image/Icon */}
         {/* Hero Image/Icon */}
         <div className="shrink-0 aspect-video bg-slate-800/50 flex items-center justify-center text-8xl border-b border-white/5 relative overflow-hidden">
-          {item.coverImage?.startsWith('/') ? (
+          {item.previewVideo ? (
+            <video
+              src={item.previewVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          ) : item.coverImage?.startsWith('/') ? (
             <img
               src={item.coverImage}
               alt={item.name}
@@ -69,6 +78,17 @@ const OSWindow = ({ item, isOpen, onClose }: OSWindowProps) => {
             {isProject && (item as Project).liveUrl && (
               <a
                 href={(item as Project).liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors font-medium"
+              >
+                <ExternalLink size={18} />
+                Launch App
+              </a>
+            )}
+            {!isProject && (item as LabItem).liveUrl && (
+              <a
+                href={(item as LabItem).liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors font-medium"

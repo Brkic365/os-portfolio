@@ -15,8 +15,9 @@ export interface FileItem {
     liveUrl?: string;
     githubUrl?: string;
     coverImage?: string; // Unified image property
-    icon?: 'game' | 'python'; // Specific for lab items
+    icon?: 'game' | 'python' | 'web'; // Specific for lab items
     demoUrl?: string;
+    previewVideo?: string;
 }
 
 export interface Directory {
@@ -35,6 +36,7 @@ const mapProjectToFileItem = (p: Project): FileItem => ({
     liveUrl: p.liveUrl,
     githubUrl: p.githubUrl,
     coverImage: p.coverImage,
+    previewVideo: p.previewVideo,
 });
 
 // Helper to convert LabItem to FileItem
@@ -47,9 +49,11 @@ const mapLabItemToFileItem = (l: LabItem): FileItem => ({
     techStack: l.techStack,
     githubUrl: l.githubUrl,
     demoUrl: l.demoUrl,
+    liveUrl: l.liveUrl,
+    previewVideo: l.previewVideo,
     icon: l.icon,
     coverImage: l.coverImage,
-    extension: l.icon === 'python' ? 'py' : 'exe'
+    extension: l.icon === 'python' ? 'py' : l.icon === 'web' ? 'app' : 'exe'
 });
 
 // File system structure

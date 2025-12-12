@@ -20,7 +20,16 @@ const ProjectFolder = ({ project, onClick }: ProjectFolderProps) => {
     >
       {/* Cover Image - 16:9 Aspect Ratio */}
       <div className="w-full aspect-video bg-gradient-to-br from-slate-800/50 via-slate-900/50 to-blue-950/30 flex items-center justify-center text-7xl border-b border-white/5 relative overflow-hidden">
-        {project.coverImage?.startsWith('/') ? (
+        {project.previewVideo ? (
+          <video
+            src={project.previewVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        ) : project.coverImage?.startsWith('/') ? (
           <img
             src={project.coverImage}
             alt={project.name}

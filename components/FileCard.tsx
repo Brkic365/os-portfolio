@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { LabItem } from '@/data/projects';
-import { Gamepad2, Code2 } from 'lucide-react';
+import { Gamepad2, Code2, Globe } from 'lucide-react';
 
 interface FileCardProps {
   labItem: LabItem;
@@ -10,13 +10,15 @@ interface FileCardProps {
 }
 
 const FileCard = ({ labItem, onClick }: FileCardProps) => {
-  const Icon = labItem.icon === 'game' ? Gamepad2 : Code2;
-  const iconColor = labItem.icon === 'game' ? 'text-purple-400' : 'text-green-400';
+  const Icon = labItem.icon === 'game' ? Gamepad2 : labItem.icon === 'web' ? Globe : Code2;
+  const iconColor = labItem.icon === 'game' ? 'text-purple-400' : labItem.icon === 'web' ? 'text-blue-400' : 'text-green-400';
 
   // Specific glow for retro feel
   const glowStyle = labItem.icon === 'game'
     ? 'drop-shadow-[0_0_10px_rgba(168,85,247,0.6)]'
-    : 'drop-shadow-[0_0_10px_rgba(34,197,94,0.6)]';
+    : labItem.icon === 'web'
+      ? 'drop-shadow-[0_0_10px_rgba(59,130,246,0.6)]'
+      : 'drop-shadow-[0_0_10px_rgba(34,197,94,0.6)]';
 
   return (
     <motion.div
