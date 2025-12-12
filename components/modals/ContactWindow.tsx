@@ -110,7 +110,7 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
                 {/* RIGHT COLUMN: Composer */}
                 <div className="flex-1 flex flex-col p-6 md:p-8 bg-slate-900/80 overflow-y-auto">
                     <div className="flex items-center justify-between mb-8">
-                        <h2 className="text-lg font-semibold text-slate-200 flex items-center gap-2">
+                        <h2 className="text-lg font-semibold text-slate-200 flex items-center gap-2" style={{ marginBottom: '1rem' }}>
                             <span className="w-2 h-2 rounded-full bg-blue-500" />
                             New Message
                         </h2>
@@ -119,7 +119,7 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
 
                     <form onSubmit={handleSubmit} className="flex-1 flex flex-col gap-6">
                         <div className="group">
-                            <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 block">Subject</label>
+                            <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 block" style={{ marginBottom: '0.5rem' }}>Subject</label>
                             <input
                                 type="text"
                                 name="subject"
@@ -132,7 +132,7 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
                         </div>
 
                         <div className="flex-1 flex flex-col group">
-                            <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 block">Message</label>
+                            <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 block" style={{ marginBottom: '0.5rem' }}>Message</label>
                             <textarea
                                 name="message"
                                 value={formData.message}
