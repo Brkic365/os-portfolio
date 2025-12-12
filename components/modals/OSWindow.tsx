@@ -48,7 +48,7 @@ const OSWindow = ({ item, isOpen, onClose }: OSWindowProps) => {
 
         {/* Body */}
         <div className="p-8 lg:p-10 bg-slate-900/50">
-          <h2 className="text-3xl font-bold text-slate-100 mb-8" style={{ marginBottom: '1rem' }}>
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-8" style={{ marginBottom: '1rem' }}>
             {isProject ? (item as Project).name : (item as LabItem).name}
           </h2>
           <p className="text-slate-300 leading-relaxed mb-10">{item.description}</p>
