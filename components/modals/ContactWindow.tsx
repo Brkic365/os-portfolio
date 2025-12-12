@@ -108,7 +108,7 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
                 </div>
 
                 {/* RIGHT COLUMN: Composer */}
-                <div className="flex-1 flex flex-col p-6 md:p-8 bg-slate-900/30 overflow-y-auto">
+                <div className="flex-1 flex flex-col p-6 md:p-8 bg-slate-900/80 overflow-y-auto">
                     <div className="flex items-center justify-between mb-8">
                         <h2 className="text-lg font-semibold text-slate-200 flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-blue-500" />
@@ -126,7 +126,7 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
                                 value={formData.subject}
                                 onChange={handleChange}
                                 placeholder="Project/Work Inquiry..."
-                                className="w-full bg-transparent border-b border-white/10 py-2 text-slate-200 placeholder-slate-600 focus:outline-none focus:border-blue-500 transition-colors font-medium text-lg font-[family-name:var(--font-jetbrains-mono)]"
+                                className="w-full bg-black/20 focus:bg-black/40 rounded-lg px-4 border-b border-white/10 py-3 text-slate-200 placeholder-slate-600 focus:outline-none focus:border-blue-500 transition-colors font-medium text-lg font-[family-name:var(--font-jetbrains-mono)]"
                                 required
                             />
                         </div>
@@ -138,7 +138,7 @@ const ContactWindow = ({ isOpen, onClose }: ContactWindowProps) => {
                                 value={formData.message}
                                 onChange={handleChange}
                                 placeholder="Hi Antonio, I'd like to talk about..."
-                                className="flex-1 w-full bg-transparent border-none resize-none text-slate-300 placeholder-slate-600 focus:outline-none focus:ring-0 text-base leading-relaxed font-[family-name:var(--font-jetbrains-mono)]"
+                                className="flex-1 w-full bg-black/20 focus:bg-black/40 rounded-lg p-4 border-none resize-none text-slate-300 placeholder-slate-600 focus:outline-none focus:ring-0 text-base leading-relaxed font-[family-name:var(--font-jetbrains-mono)]"
                                 required
                             />
                         </div>
