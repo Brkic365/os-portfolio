@@ -106,7 +106,6 @@ export const filesystem: Directory[] = [
 >
 > **Current Focus:**
 > 🚀 **Full-Stack Architecture:** Expert in React, Next.js, TypeScript, and Postgres.
-> 🕶️ **3D & AR on the Web:** Co-founder of **VectraXR** (B2B 3D visualization for the fitness industry).
 >
 > **Status:**
 > 🟢 Available for freelance & collaborations.`,
